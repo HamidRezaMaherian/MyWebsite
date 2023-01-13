@@ -1,12 +1,9 @@
 ﻿using MyWebsite.Domain.Models.Base;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace MyWebsite.Domain.Models
 {
-    public class SiteVisit:BaseEntity
+   public class SiteVisit:BaseEntity
     {
         [Required]
         public string IP { get; set; }

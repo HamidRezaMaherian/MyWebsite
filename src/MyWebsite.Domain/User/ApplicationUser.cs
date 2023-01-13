@@ -1,11 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
-using MyWebsite.Domain.Models.Base;
-using System.Globalization;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MyWebsite.Domain.Models.User
 {

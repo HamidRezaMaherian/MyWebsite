@@ -1,8 +1,5 @@
 ﻿using MyWebsite.Domain.Models.Base;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 using MyWebsite.Domain.Models.User;
 using System.ComponentModel.DataAnnotations.Schema;
 

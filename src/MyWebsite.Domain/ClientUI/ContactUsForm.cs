@@ -1,11 +1,10 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using MyWebsite.Domain.Models.Base;
 using MyWebsite.Domain.Models.User;
 
 namespace MyWebsite.Domain.Models.ClientUI
 {
-    public class ContactUsForm : BaseEntity
+   public class ContactUsForm : BaseEntity
     {
         public string UserId { get; set; }
 
