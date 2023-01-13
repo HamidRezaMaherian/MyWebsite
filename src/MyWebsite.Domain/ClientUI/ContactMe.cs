@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using MyWebsite.Domain.Models.Base;
+﻿using MyWebsite.Domain.Models.Base;
+using MyWebsite.Shared.Attributes;
 
 namespace MyWebsite.Domain.Models.ClientUI
 {
@@ -28,11 +28,5 @@ namespace MyWebsite.Domain.Models.ClientUI
       public string Twitter { get; set; }
       [MaxLength(150)]
       public string FaceBook { get; set; }
-      //[Url]
-      //[MaxLength(150)]
-      //public string Aparat { get; set; }
-      //[Url]
-      //[MaxLength(150)]
-      //public string Youtube { get; set; }
    }
 }

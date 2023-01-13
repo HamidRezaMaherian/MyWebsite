@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MyWebsite.Shared.Resources;
+using System.ComponentModel.DataAnnotations;
 
 namespace MyWebsite.Domain.Models.User
 {
@@ -8,8 +9,9 @@ namespace MyWebsite.Domain.Models.User
       public DateTime LastLoginDateTime { get; set; }
       public string ImagePath { get; set; }
       public string FullName { get; set; }
-      [Display(Name = "وضعیت نمایش")]
-      public bool IsActive { get; set; }
-      public bool IsDelete { get; set; }
+		[Display(ResourceType = typeof(DomainResource))]
+		public bool IsActive { get; set; }
+		[Display(ResourceType = typeof(DomainResource))]
+		public bool IsDelete { get; set; }
    }
 }

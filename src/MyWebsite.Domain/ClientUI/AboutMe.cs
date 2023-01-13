@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using MyWebsite.Domain.Models.Base;
+﻿using MyWebsite.Domain.Models.Base;
+using MyWebsite.Shared.Attributes;
 
 namespace MyWebsite.Domain.Models.ClientUI
 {
@@ -8,5 +8,5 @@ namespace MyWebsite.Domain.Models.ClientUI
       [Required]
       public string FilePath { get; set; }
    }
-   public class AboutUsKeyValue:KeyValue{}
+   public class AboutUsKeyValue : KeyValue { }
 }

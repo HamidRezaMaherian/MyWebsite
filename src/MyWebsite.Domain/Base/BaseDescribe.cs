@@ -1,13 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MyWebsite.Shared.Attributes;
 
 namespace MyWebsite.Domain.Models.Base
 {
    public class BaseDescribe : BaseEntity
    {
-      [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+      [Required]
       public string Title { get; set; }
 
-      [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+      [Required]
       public string SubTitle { get; set; }
    }
 }

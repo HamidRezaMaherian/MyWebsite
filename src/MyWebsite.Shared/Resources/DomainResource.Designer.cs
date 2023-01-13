@@ -59,5 +59,23 @@ namespace MyWebsite.Shared.Resources {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Active Status.
+        /// </summary>
+        public static string IsActive {
+            get {
+                return ResourceManager.GetString("IsActive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete Status.
+        /// </summary>
+        public static string IsDelete {
+            get {
+                return ResourceManager.GetString("IsDelete", resourceCulture);
+            }
+        }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using MyWebsite.Domain.Models.Base;
-using System.ComponentModel.DataAnnotations;
 using MyWebsite.Domain.Models.User;
-using System.ComponentModel.DataAnnotations.Schema;
+using MyWebsite.Shared.Attributes;
 
 namespace MyWebsite.Domain.Models
 {
@@ -20,7 +19,7 @@ namespace MyWebsite.Domain.Models
 
       #region NavigationProps
 
-      [ForeignKey(nameof(UserId))]
+      [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(UserId))]
       public virtual ApplicationUser User { get; set; }
 
       #endregion

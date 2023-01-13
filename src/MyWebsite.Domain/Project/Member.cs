@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using MyWebsite.Domain.Models.Base;
+﻿using MyWebsite.Domain.Models.Base;
+using MyWebsite.Shared.Attributes;
 
 namespace MyWebsite.Domain.Models.Projects
 {

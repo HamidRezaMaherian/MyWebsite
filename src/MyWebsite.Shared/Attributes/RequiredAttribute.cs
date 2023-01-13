@@ -1,11 +1,10 @@
 ﻿using MyWebsite.Shared.Resources;
-using System.ComponentModel.DataAnnotations;
 
 namespace MyWebsite.Shared.Attributes
 {
-	public class MyRequiredAttribute : RequiredAttribute
+	public class RequiredAttribute : System.ComponentModel.DataAnnotations.RequiredAttribute
 	{
-		public MyRequiredAttribute()
+		public RequiredAttribute()
 		{
 			ErrorMessageResourceType = typeof(ErrorResource);
 			ErrorMessageResourceName = nameof(ErrorResource.Required);

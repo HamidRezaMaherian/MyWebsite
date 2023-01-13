@@ -1,5 +1,5 @@
 ﻿using MyWebsite.Domain.Models.Base;
-using System.ComponentModel.DataAnnotations;
+using MyWebsite.Shared.Attributes;
 
 namespace MyWebsite.Domain.Models
 {

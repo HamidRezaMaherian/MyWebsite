@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace MyWebsite.Domain.Models.Base
 {
@@ -16,10 +13,10 @@ namespace MyWebsite.Domain.Models.Base
    }
    public class BaseLanguageDescribe : BaseLanguage
    {
-      [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+      [Required]
       public string Title { get; set; }
 
-      [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+      [Required]
       public string SubTitle { get; set; }
    }
 }
