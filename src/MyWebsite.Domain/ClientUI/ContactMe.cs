@@ -3,7 +3,7 @@ using MyWebsite.Domain.Models.Base;
 
 namespace MyWebsite.Domain.Models.ClientUI
 {
-   public class ContactUs : BaseLanguage
+   public class ContactMe : BaseLanguage
    {
       [Required]
       [EmailAddress]

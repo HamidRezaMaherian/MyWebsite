@@ -1,9 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace MyWebsite.Domain.Models.User
 {
-   public class ApplicationUser : IdentityUser
+   public class ApplicationUser
    {
       public DateTime SignUpDateTime { get; set; }
       public DateTime LastLoginDateTime { get; set; }
