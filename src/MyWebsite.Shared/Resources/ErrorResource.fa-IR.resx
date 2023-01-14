@@ -130,6 +130,6 @@
     <value>فیلد {0} الزامی است</value>
   </data>
   <data name="StringLength" xml:space="preserve">
-    <value>فیلد {0} باید کمتر از {1} کاراکتر باشد</value>
+    <value>فیلد {0} باید بین {2} و {1} کاراکتر باشد</value>
   </data>
 </root>

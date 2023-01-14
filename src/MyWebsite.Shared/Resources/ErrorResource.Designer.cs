@@ -97,7 +97,7 @@ namespace MyWebsite.Shared.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Field {0} must be less than {1} characters.
+        ///   Looks up a localized string similar to Field {0} must be between {2} and {1} characters.
         /// </summary>
         public static string StringLength {
             get {
