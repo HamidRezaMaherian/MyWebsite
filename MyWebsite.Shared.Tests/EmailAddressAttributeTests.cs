@@ -63,16 +63,20 @@ namespace MyWebsite.Shared.Tests
 		}
 
 		[TestCase("hamid", false)]
+		[TestCase("hamid@.com", false)]
+		[TestCase("hamid@ali", false)]
 		[TestCase("hamid@ali.com", true)]
-		public void GetValidationResult_PassFakeClassObject(string text, bool isValid)
+		public void GetValidationResult_PassFakeClassObject(string text, bool expectedResult)
 		{
 			//Arrange
 			var fakeObj = new FakeClass() { Text = text };
 			var attr = fakeObj.GetType().GetProperty("Text")!.GetCustomAttribute<EmailAddressAttribute>();
 			//Act
+			var isValid = attr!.IsValid(text);
 			var getValidateResult = attr!.GetValidationResult(fakeObj.Text, new System.ComponentModel.DataAnnotations.ValidationContext(fakeObj));
 			//Assert
-			Assert.That(getValidateResult is null, Is.EqualTo(isValid));
+			Assert.That(isValid, Is.EqualTo(expectedResult));
+			Assert.That(getValidateResult is null, Is.EqualTo(expectedResult));
 		}
 		private class FakeClass
 		{

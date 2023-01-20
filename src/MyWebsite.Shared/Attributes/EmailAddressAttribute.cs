@@ -35,12 +35,28 @@ namespace MyWebsite.Shared.Attributes
 
 			// only return true if there is only 1 '@' character
 			// and it is neither the first nor the last character
-			int index = valueAsString.IndexOf('@');
-
 			return
-				 index > 0 &&
-				 index != valueAsString.Length - 1 &&
-				 index == valueAsString.LastIndexOf('@');
+				IsAtSignCorrect(valueAsString) &&
+				IsNextAndPreviousCorrect(valueAsString);
+		}
+
+		private static bool IsNextAndPreviousCorrect(string valueAsString)
+		{
+			int index = valueAsString.IndexOf('@');
+			var nextChar = valueAsString[index + 1];
+			var prevChar = valueAsString[index + 1];
+			
+			return		 nextChar is (>= 'a' and <= 'z') or (>= 'A' and <= 'Z') &&
+							 prevChar is (>= 'a' and <= 'z') or (>= 'A' and <= 'Z') &&
+							 valueAsString.IndexOf('.') > index;
+		}
+
+		private static bool IsAtSignCorrect(string valueAsString)
+		{
+			int index = valueAsString.IndexOf('@');
+			return index > 0 &&
+							 index != valueAsString.Length - 1 &&
+							 index == valueAsString.LastIndexOf('@');
 		}
 	}
 }
