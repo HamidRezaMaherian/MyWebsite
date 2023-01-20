@@ -16,7 +16,7 @@ namespace MyWebsite.Shared.Tests
 		}
 
 		[Test]
-		public void CreateObject_WithValidLength()
+		public void CreateObject()
 		{
 			var attr = new PhoneAttribute();
 			Assert.Pass();
