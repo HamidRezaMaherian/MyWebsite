@@ -1,4 +1,4 @@
-﻿namespace MyWebsite.Domain.Models.ClientUI
+﻿namespace MyWebsite.Domain.Entities.Info
 {
    public class Education : History
    {

@@ -1,6 +1,6 @@
 ﻿using MyWebsite.Shared.Attributes;
 
-namespace MyWebsite.Domain.Models.Base
+namespace MyWebsite.Domain.Base
 {
 	public class BaseCategory : BaseEntity
 	{

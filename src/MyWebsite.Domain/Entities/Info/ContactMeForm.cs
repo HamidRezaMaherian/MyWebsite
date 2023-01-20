@@ -1,10 +1,10 @@
-﻿using MyWebsite.Domain.Models.Base;
-using MyWebsite.Domain.Models.User;
+﻿using MyWebsite.Domain.Base;
+using MyWebsite.Domain.Entities.User;
 using MyWebsite.Shared.Attributes;
 
-namespace MyWebsite.Domain.Models.ClientUI
+namespace MyWebsite.Domain.Entities.Info
 {
-	public class ContactUsForm : BaseEntity
+	public class ContactMeForm : BaseEntity
 	{
 		public string UserId { get; set; }
 

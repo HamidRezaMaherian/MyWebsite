@@ -1,8 +1,8 @@
-﻿using MyWebsite.Domain.Models.Base;
-using MyWebsite.Domain.Models.User;
+﻿using MyWebsite.Domain.Base;
+using MyWebsite.Domain.Entities.User;
 using MyWebsite.Shared.Attributes;
 
-namespace MyWebsite.Domain.Models
+namespace MyWebsite.Domain.Entities
 {
    public class ActivityLog : BaseEntity
    {

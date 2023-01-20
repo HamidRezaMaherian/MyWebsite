@@ -1,7 +1,7 @@
-﻿using MyWebsite.Domain.Models.Base;
+﻿using MyWebsite.Domain.Base;
 using MyWebsite.Shared.Attributes;
 
-namespace MyWebsite.Domain.Models.ClientUI
+namespace MyWebsite.Domain.Entities.Info
 {
    public class AboutMe : BaseLanguage
    {
