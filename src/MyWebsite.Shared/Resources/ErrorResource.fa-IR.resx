@@ -132,4 +132,7 @@
   <data name="StringLength" xml:space="preserve">
     <value>فیلد {0} باید بین {2} و {1} کاراکتر باشد</value>
   </data>
+  <data name="Url" xml:space="preserve">
+    <value>فیلد {0} باید یک آدرس معتبر باشد</value>
+  </data>
 </root>

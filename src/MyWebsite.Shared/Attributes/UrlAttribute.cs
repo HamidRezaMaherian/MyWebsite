@@ -9,7 +9,7 @@ namespace MyWebsite.Shared.Attributes
 	 : base(DataType.Url)
 		{
 			ErrorMessageResourceType = typeof(ErrorResource);
-			ErrorMessageResourceName = nameof(ErrorResource.Required);
+			ErrorMessageResourceName = nameof(ErrorResource.Url);
 		}
 
 		public override bool IsValid(object? value)
