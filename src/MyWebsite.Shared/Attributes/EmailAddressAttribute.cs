@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MyWebsite.Shared.Attributes
 {
+	[AttributeUsage(AttributeTargets.Field | AttributeTargets.Parameter | AttributeTargets.Property, AllowMultiple = false)]
 	public class EmailAddressAttribute : DataTypeAttribute
 	{
 		private static bool EnableFullDomainLiterals { get; } =
