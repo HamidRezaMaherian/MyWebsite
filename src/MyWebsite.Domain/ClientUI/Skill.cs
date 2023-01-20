@@ -6,7 +6,7 @@ namespace MyWebsite.Domain.Models.ClientUI
    public class Skill : BaseEntity
    {
       [Required]
-      [MaxLength(100)]
+      [StringLength(100)]
       public string Name { get; set; }
       [Required]
       public int Value { get; set; }
