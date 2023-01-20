@@ -6,7 +6,7 @@ namespace MyWebsite.Domain.Models
    public class Language:BaseEntity
     {
       [Required]
-      [MaxLength(50)]
+      [StringLength(50)]
       public string Culture { get; set; }
    }
 }

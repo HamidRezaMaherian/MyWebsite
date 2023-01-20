@@ -132,4 +132,7 @@
   <data name="StringLength" xml:space="preserve">
     <value>Field {0} must be between {2} and {1} characters</value>
   </data>
+  <data name="Url" xml:space="preserve">
+    <value>Field {0} is not a valid URL</value>
+  </data>
 </root>

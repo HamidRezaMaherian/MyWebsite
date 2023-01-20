@@ -5,7 +5,7 @@ namespace MyWebsite.Domain.Models.Base
 	public class BaseCategory : BaseEntity
 	{
 		[Required]
-		[MaxLength(50)]
+		[StringLength(50)]
 		public string Name { get; set; }
 
 	}

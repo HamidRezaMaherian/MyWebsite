@@ -8,7 +8,6 @@ namespace MyWebsite.Shared.Attributes
 		{
 			ErrorMessageResourceType = typeof(ErrorResource);
 			ErrorMessageResourceName = nameof(ErrorResource.Required);
-			ErrorMessage = nameof(ErrorResource.Required);
 		}
 	}
 }

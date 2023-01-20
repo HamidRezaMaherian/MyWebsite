@@ -19,7 +19,7 @@ namespace MyWebsite.Domain.Models.ClientUI
 		[Required]
 		public string Message { get; set; }
 
-		[MaxLength(500)]
+		[StringLength(500)]
 		public string Answer { get; set; }
 
 		public bool IsAnswered { get; set; }
