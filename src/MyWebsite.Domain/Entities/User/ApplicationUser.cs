@@ -1,7 +1,7 @@
 ﻿using MyWebsite.Shared.Resources;
 using System.ComponentModel.DataAnnotations;
 
-namespace MyWebsite.Domain.Models.User
+namespace MyWebsite.Domain.Entities.User
 {
    public class ApplicationUser
    {

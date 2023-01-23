@@ -1,10 +1,7 @@
 ﻿using MyWebsite.Shared.Resources;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
-namespace MyWebsite.Domain.Models.Base
+namespace MyWebsite.Domain.Base
 {
 	public class BaseEntity
 	{

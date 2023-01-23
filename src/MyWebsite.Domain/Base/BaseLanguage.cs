@@ -1,7 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MyWebsite.Domain.Entities;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace MyWebsite.Domain.Models.Base
+namespace MyWebsite.Domain.Base
 {
    public class BaseLanguage : BaseEntity
    {
