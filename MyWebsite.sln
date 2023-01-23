@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyWebsite.Shared", "src\MyW
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyWebsite.Web", "src\MyWebsite.Web\MyWebsite.Web.csproj", "{6EDAD484-3CBB-4018-A7BD-89A205FAF0C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyWebsite.Shared.Tests", "MyWebsite.Shared.Tests\MyWebsite.Shared.Tests.csproj", "{0B1DF522-C3EF-47CD-915F-7E1D09E64159}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyWebsite.Shared.Tests", "tests\MyWebsite.Shared.Tests\MyWebsite.Shared.Tests.csproj", "{0B1DF522-C3EF-47CD-915F-7E1D09E64159}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
