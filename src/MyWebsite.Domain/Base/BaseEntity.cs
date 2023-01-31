@@ -7,9 +7,9 @@ namespace MyWebsite.Domain.Base
 	{
 		[Key]
 		public int Id { get; set; }
-		[Display(ResourceType = typeof(DomainResource))]
+		[Display(ResourceType = typeof(EntityResource))]
 		public bool IsActive { get; set; }
-		[Display(ResourceType = typeof(DomainResource))]
+		[Display(ResourceType = typeof(EntityResource))]
 		public bool IsDelete { get; set; }
 	}
 }
