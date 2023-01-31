@@ -9,9 +9,9 @@ namespace MyWebsite.Domain.Entities.User
       public DateTime LastLoginDateTime { get; set; }
       public string ImagePath { get; set; }
       public string FullName { get; set; }
-		[Display(ResourceType = typeof(DomainResource))]
+		[Display(ResourceType = typeof(EntityResource))]
 		public bool IsActive { get; set; }
-		[Display(ResourceType = typeof(DomainResource))]
+		[Display(ResourceType = typeof(EntityResource))]
 		public bool IsDelete { get; set; }
    }
 }
