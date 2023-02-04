@@ -13,6 +13,14 @@ public class ContactMeRepoTests
 	private ApplicationDbContext _db;
 	private ContactMeRepo _repo;
 
+	private void RollBack()
+	{
+		var oldEntity = SeedDataCreator.CreateContactMe().FirstOrDefault()!;
+		_db.ContactMe.Update(oldEntity);
+		_db.SaveChanges();
+		_db.Entry(oldEntity).State = EntityState.Detached;
+	}
+
 	[OneTimeSetUp]
 	public async Task OneTimeSetup()
 	{
@@ -39,6 +47,7 @@ public class ContactMeRepoTests
 		//Assert
 		Assert.Pass();
 	}
+	#region AsyncMethods
 
 	[Test]
 	public async Task FirstOrDefaultAsync_PassNull_ThrowException()
@@ -143,7 +152,116 @@ public class ContactMeRepoTests
 		Assert.That(result?.Email, Is.EqualTo(entity!.Email));
 		Assert.That(result?.PhoneNumber, Is.EqualTo(entity!.PhoneNumber));
 		//Annhilation
-		_db.ContactMe.Update(SeedDataCreator.CreateContactMe().FirstOrDefault()!);
-		await _db.SaveChangesAsync();
+		RollBack();
 	}
+	#endregion
+
+	#region NonAsyncMethods
+	[Test]
+	public void FirstOrDefault_PassNull_ThrowException()
+	{
+		//Arrange
+		//Act
+		var res = _repo.FirstOrDefault();
+		//Assert
+		var actualData = SeedDataCreator.CreateContactMe();
+		Assert.That(res, Is.EqualTo(actualData.FirstOrDefault(i => i.Id == 1)));
+	}
+	[Test]
+	public void FirstOrDefault_PassExistingPredicates_ReturnExactValue()
+	{
+		//Arrange
+		//Act
+		var res = _repo.FirstOrDefault(i => true);
+		var res2 = _repo.FirstOrDefault(i => i.Id == 2);
+		var res3 = _repo.FirstOrDefault(i => i.Email == "test@test");
+		var res4 = _repo.FirstOrDefault(i => i.Email == "test@test" && i.PhoneNumber == "09304422204");
+		var res5 = _repo.FirstOrDefault(i => i.Email == "test@test" && i.PhoneNumber == "09304422204" && i.LangId == 2);
+		//Assert
+		var actualData = SeedDataCreator.CreateContactMe();
+		Assert.That(res, Is.EqualTo(actualData.FirstOrDefault(i => i.Id == 1)));
+		Assert.That(res2, Is.EqualTo(actualData.FirstOrDefault(i => i.Id == 2)));
+		Assert.That(res3, Is.EqualTo(actualData.FirstOrDefault(i => i.Id == 1)));
+		Assert.That(res4, Is.EqualTo(actualData.FirstOrDefault(i => i.Id == 1)));
+		Assert.That(res5, Is.EqualTo(actualData.FirstOrDefault(i => i.Id == 2)));
+	}
+
+	[Test]
+	public void FirstOrDefault_PassNonExistingPredicates_ReturnNull()
+	{
+		//Arrange
+		//Act
+		var res = _repo.FirstOrDefault(i => false);
+		var res2 = _repo.FirstOrDefault(i => i.Id != 1 && i.Id != 2);
+		var res3 = _repo.FirstOrDefault(i => i.Email != "test@test");
+		var res4 = _repo.FirstOrDefault(i => i.Email == "test@te" || i.PhoneNumber == "094422204");
+		var res5 = _repo.FirstOrDefault(i => i.Email == "te@test" || i.PhoneNumber == "0304422204" && i.LangId == 2);
+		//Assert
+		var actualData = SeedDataCreator.CreateContactMe();
+		Assert.That(res, Is.Null);
+		Assert.That(res2, Is.Null);
+		Assert.That(res3, Is.Null);
+		Assert.That(res4, Is.Null);
+		Assert.That(res5, Is.Null);
+	}
+
+	[Test]
+	public void Update_PassNull_ThrowException()
+	{
+		Assert.Throws<ArgumentNullException>(() =>
+		{
+			_repo.Update(null);
+		});
+
+	}
+	[Test]
+	public void Update_PassNonExistingEntity_ThrowException()
+	{
+		try
+		{
+			_repo.Update(new ContactMe());
+		}
+		catch (Exception)
+		{
+			Assert.Pass();
+			return;
+		}
+		Assert.Fail("no exception thrown");
+	}
+	[Test]
+	public void Update_PassExistingInvalidEntity_ThrowException()
+	{
+		var entity = SeedDataCreator.CreateContactMe().FirstOrDefault();
+		entity!.Email = null;
+		entity!.PhoneNumber = null;
+		entity!.LangId = 4;
+		try
+		{
+			_repo.Update(entity);
+		}
+		catch (Exception)
+		{
+			Assert.Pass();
+			return;
+		}
+		Assert.Fail("no exception thrown");
+	}
+	[Test]
+	public void Update_PassExistingValidEntity_UpdateEntity()
+	{
+		//Arrange
+		var entity = SeedDataCreator.CreateContactMe().FirstOrDefault();
+		entity!.Email = "info@hamidrm.ir";
+		entity!.PhoneNumber = "09304422204";
+		//Act
+		_repo.Update(entity);
+		//Assert
+		var result = _db.ContactMe.AsNoTracking().FirstOrDefault();
+		Assert.That(result?.Email, Is.EqualTo(entity!.Email));
+		Assert.That(result?.PhoneNumber, Is.EqualTo(entity!.PhoneNumber));
+		//Annhilation
+		RollBack();
+	}
+
+	#endregion
 }

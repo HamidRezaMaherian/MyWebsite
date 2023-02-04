@@ -1,11 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MyWebsite.Application.Repositories;
 using MyWebsite.Domain.Entities.Info;
 using MyWebsite.Infrastructure.Persistent;
 using System.Linq.Expressions;
 
 namespace MyWebsite.Infrastructure.Repositories.Info
 {
-	internal class ContactMeRepo
+	internal class ContactMeRepo : IContactMeRepo
 	{
 		private readonly ApplicationDbContext _db;
 
@@ -14,12 +15,23 @@ namespace MyWebsite.Infrastructure.Repositories.Info
 			ArgumentNullException.ThrowIfNull(db, nameof(db));
 			_db = db;
 		}
+
+		public ContactMe FirstOrDefault(Expression<Func<ContactMe, bool>> condition = null)
+		{
+			return FirstOrDefaultAsync(condition).Result;
+		}
+
 		public async Task<ContactMe> FirstOrDefaultAsync(Expression<Func<ContactMe, bool>> condition = null)
 		{
 			return
 				condition is null ?
 				await _db.ContactMe.AsNoTracking().FirstOrDefaultAsync() :
 				await _db.ContactMe.AsNoTracking().FirstOrDefaultAsync(condition);
+		}
+
+		public void Update(ContactMe entity)
+		{
+			UpdateAsync(entity).GetAwaiter().GetResult();
 		}
 
 		public async Task UpdateAsync(ContactMe entity)
