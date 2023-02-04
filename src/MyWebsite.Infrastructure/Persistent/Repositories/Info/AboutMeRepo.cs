@@ -4,7 +4,7 @@ using MyWebsite.Domain.Entities.Info;
 using MyWebsite.Infrastructure.Persistent;
 using System.Linq.Expressions;
 
-namespace MyWebsite.Infrastructure.Tests.Repositories.Info
+namespace MyWebsite.Infrastructure.Repositories.Info
 {
 	internal class AboutMeRepo : IAboutMeRepo
 	{

@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using MyWebsite.Domain.Entities.Info;
 using MyWebsite.Infrastructure.Persistent;
+using MyWebsite.Infrastructure.Repositories.Info;
 
 namespace MyWebsite.Infrastructure.Tests.Repositories.Info;
 
