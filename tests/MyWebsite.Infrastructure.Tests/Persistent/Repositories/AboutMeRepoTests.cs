@@ -1,22 +1,19 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query.Internal;
 using MyWebsite.Domain.Entities.Info;
 using MyWebsite.Infrastructure.Persistent;
-using MyWebsite.Infrastructure.Repositories.Info;
-using System.Linq.Expressions;
 
 namespace MyWebsite.Infrastructure.Tests.Repositories.Info;
 
 [TestFixture]
-public class ContactMeRepoTests
+public class AboutMeRepoTests
 {
 	private ApplicationDbContext _db;
-	private ContactMeRepo _repo;
+	private AboutMeRepo _repo;
 
 	private void RollBack()
 	{
-		var oldEntity = SeedDataCreator.CreateContactMe().FirstOrDefault()!;
-		_db.ContactMe.Update(oldEntity);
+		var oldEntity = SeedDataCreator.CreateAboutMe().FirstOrDefault()!;
+		_db.AboutMe.Update(oldEntity);
 		_db.SaveChanges();
 		_db.Entry(oldEntity).State = EntityState.Detached;
 	}
@@ -29,21 +26,21 @@ public class ContactMeRepoTests
 		{
 			await _db.Database.MigrateAsync();
 		}
-		_repo = new ContactMeRepo(_db);
+		_repo = new AboutMeRepo(_db);
 	}
 	[Test]
 	public void CreateObj_PassNull()
 	{
 		Assert.Throws<ArgumentNullException>(() =>
 		{
-			var repo = new ContactMeRepo(null);
+			var repo = new AboutMeRepo(null);
 		});
 	}
 	[Test]
 	public void CreateObj_PassLocalDb()
 	{
 		//Act
-		var repo = new ContactMeRepo(_db);
+		var repo = new AboutMeRepo(_db);
 		//Assert
 		Assert.Pass();
 	}
@@ -56,26 +53,23 @@ public class ContactMeRepoTests
 		//Act
 		var res = await _repo.FirstOrDefaultAsync();
 		//Assert
-		var actualData = SeedDataCreator.CreateContactMe();
+		var actualData = SeedDataCreator.CreateAboutMe();
 		Assert.That(res, Is.EqualTo(actualData.FirstOrDefault(i => i.Id == 1)));
 	}
 	[Test]
 	public async Task FirstOrDefaultAsync_PassExistingPredicates_ReturnExactValue()
 	{
-		//Arrange
 		//Act
 		var res = await _repo.FirstOrDefaultAsync(i => true);
 		var res2 = await _repo.FirstOrDefaultAsync(i => i.Id == 2);
-		var res3 = await _repo.FirstOrDefaultAsync(i => i.Email == "test@test");
-		var res4 = await _repo.FirstOrDefaultAsync(i => i.Email == "test@test" && i.PhoneNumber == "09304422204");
-		var res5 = await _repo.FirstOrDefaultAsync(i => i.Email == "test@test" && i.PhoneNumber == "09304422204" && i.LangId == 2);
+		var res3 = await _repo.FirstOrDefaultAsync(i => i.FilePath == "no file" && i.LangId == 1);
+		var res4 = await _repo.FirstOrDefaultAsync(i => i.LangId == 2);
 		//Assert
-		var actualData = SeedDataCreator.CreateContactMe();
+		var actualData = SeedDataCreator.CreateAboutMe();
 		Assert.That(res, Is.EqualTo(actualData.FirstOrDefault(i => i.Id == 1)));
 		Assert.That(res2, Is.EqualTo(actualData.FirstOrDefault(i => i.Id == 2)));
 		Assert.That(res3, Is.EqualTo(actualData.FirstOrDefault(i => i.Id == 1)));
-		Assert.That(res4, Is.EqualTo(actualData.FirstOrDefault(i => i.Id == 1)));
-		Assert.That(res5, Is.EqualTo(actualData.FirstOrDefault(i => i.Id == 2)));
+		Assert.That(res4, Is.EqualTo(actualData.FirstOrDefault(i => i.Id == 2)));
 	}
 
 	[Test]
@@ -85,11 +79,11 @@ public class ContactMeRepoTests
 		//Act
 		var res = await _repo.FirstOrDefaultAsync(i => false);
 		var res2 = await _repo.FirstOrDefaultAsync(i => i.Id != 1 && i.Id != 2);
-		var res3 = await _repo.FirstOrDefaultAsync(i => i.Email != "test@test");
-		var res4 = await _repo.FirstOrDefaultAsync(i => i.Email == "test@te" || i.PhoneNumber == "094422204");
-		var res5 = await _repo.FirstOrDefaultAsync(i => i.Email == "te@test" || i.PhoneNumber == "0304422204" && i.LangId == 2);
+		var res3 = await _repo.FirstOrDefaultAsync(i => i.FilePath != "no file");
+		var res4 = await _repo.FirstOrDefaultAsync(i => i.FilePath == "n file" || i.LangId == 3);
+		var res5 = await _repo.FirstOrDefaultAsync(i => i.FilePath != "no file" && i.LangId == 2);
 		//Assert
-		var actualData = SeedDataCreator.CreateContactMe();
+		var actualData = SeedDataCreator.CreateAboutMe();
 		Assert.That(res, Is.Null);
 		Assert.That(res2, Is.Null);
 		Assert.That(res3, Is.Null);
@@ -111,21 +105,21 @@ public class ContactMeRepoTests
 	{
 		try
 		{
-			await _repo.UpdateAsync(new ContactMe());
+			await _repo.UpdateAsync(new AboutMe());
 		}
 		catch (Exception)
 		{
 			Assert.Pass();
 			return;
 		}
+		RollBack();
 		Assert.Fail("no exception thrown");
 	}
 	[Test]
 	public async Task UpdateAsync_PassExistingInvalidEntity_ThrowException()
 	{
-		var entity = SeedDataCreator.CreateContactMe().FirstOrDefault();
-		entity!.Email = null;
-		entity!.PhoneNumber = null;
+		var entity = SeedDataCreator.CreateAboutMe().FirstOrDefault();
+		entity!.FilePath = null;
 		entity!.LangId = 4;
 		try
 		{
@@ -136,21 +130,22 @@ public class ContactMeRepoTests
 			Assert.Pass();
 			return;
 		}
+		RollBack();
 		Assert.Fail("no exception thrown");
 	}
 	[Test]
 	public async Task UpdateAsync_PassExistingValidEntity_UpdateEntity()
 	{
 		//Arrange
-		var entity = SeedDataCreator.CreateContactMe().FirstOrDefault();
-		entity!.Email = "info@hamidrm.ir";
-		entity!.PhoneNumber = "09304422204";
+		var entity = SeedDataCreator.CreateAboutMe().FirstOrDefault();
+		entity!.FilePath = "KJFGOE502K30FOJWO320930FJOW7490283";
+		entity!.LangId = 2;
 		//Act
 		await _repo.UpdateAsync(entity);
 		//Assert
-		var result = await _db.ContactMe.AsNoTracking().FirstOrDefaultAsync();
-		Assert.That(result?.Email, Is.EqualTo(entity!.Email));
-		Assert.That(result?.PhoneNumber, Is.EqualTo(entity!.PhoneNumber));
+		var result = await _db.AboutMe.AsNoTracking().FirstOrDefaultAsync();
+		Assert.That(result?.FilePath, Is.EqualTo(entity!.FilePath));
+		Assert.That(result?.LangId, Is.EqualTo(entity!.LangId));
 		//Annhilation
 		RollBack();
 	}
@@ -164,26 +159,23 @@ public class ContactMeRepoTests
 		//Act
 		var res = _repo.FirstOrDefault();
 		//Assert
-		var actualData = SeedDataCreator.CreateContactMe();
+		var actualData = SeedDataCreator.CreateAboutMe();
 		Assert.That(res, Is.EqualTo(actualData.FirstOrDefault(i => i.Id == 1)));
 	}
 	[Test]
 	public void FirstOrDefault_PassExistingPredicates_ReturnExactValue()
 	{
-		//Arrange
 		//Act
 		var res = _repo.FirstOrDefault(i => true);
 		var res2 = _repo.FirstOrDefault(i => i.Id == 2);
-		var res3 = _repo.FirstOrDefault(i => i.Email == "test@test");
-		var res4 = _repo.FirstOrDefault(i => i.Email == "test@test" && i.PhoneNumber == "09304422204");
-		var res5 = _repo.FirstOrDefault(i => i.Email == "test@test" && i.PhoneNumber == "09304422204" && i.LangId == 2);
+		var res3 = _repo.FirstOrDefault(i => i.FilePath == "no file" && i.LangId == 1);
+		var res4 = _repo.FirstOrDefault(i => i.LangId == 2);
 		//Assert
-		var actualData = SeedDataCreator.CreateContactMe();
+		var actualData = SeedDataCreator.CreateAboutMe();
 		Assert.That(res, Is.EqualTo(actualData.FirstOrDefault(i => i.Id == 1)));
 		Assert.That(res2, Is.EqualTo(actualData.FirstOrDefault(i => i.Id == 2)));
 		Assert.That(res3, Is.EqualTo(actualData.FirstOrDefault(i => i.Id == 1)));
-		Assert.That(res4, Is.EqualTo(actualData.FirstOrDefault(i => i.Id == 1)));
-		Assert.That(res5, Is.EqualTo(actualData.FirstOrDefault(i => i.Id == 2)));
+		Assert.That(res4, Is.EqualTo(actualData.FirstOrDefault(i => i.Id == 2)));
 	}
 
 	[Test]
@@ -193,11 +185,11 @@ public class ContactMeRepoTests
 		//Act
 		var res = _repo.FirstOrDefault(i => false);
 		var res2 = _repo.FirstOrDefault(i => i.Id != 1 && i.Id != 2);
-		var res3 = _repo.FirstOrDefault(i => i.Email != "test@test");
-		var res4 = _repo.FirstOrDefault(i => i.Email == "test@te" || i.PhoneNumber == "094422204");
-		var res5 = _repo.FirstOrDefault(i => i.Email == "te@test" || i.PhoneNumber == "0304422204" && i.LangId == 2);
+		var res3 = _repo.FirstOrDefault(i => i.FilePath != "no file");
+		var res4 = _repo.FirstOrDefault(i => i.FilePath == "n file" || i.LangId == 3);
+		var res5 = _repo.FirstOrDefault(i => i.FilePath != "no file" && i.LangId == 2);
 		//Assert
-		var actualData = SeedDataCreator.CreateContactMe();
+		var actualData = SeedDataCreator.CreateAboutMe();
 		Assert.That(res, Is.Null);
 		Assert.That(res2, Is.Null);
 		Assert.That(res3, Is.Null);
@@ -219,21 +211,21 @@ public class ContactMeRepoTests
 	{
 		try
 		{
-			_repo.Update(new ContactMe());
+			_repo.Update(new AboutMe());
 		}
 		catch (Exception)
 		{
 			Assert.Pass();
 			return;
 		}
+		RollBack();
 		Assert.Fail("no exception thrown");
 	}
 	[Test]
 	public void Update_PassExistingInvalidEntity_ThrowException()
 	{
-		var entity = SeedDataCreator.CreateContactMe().FirstOrDefault();
-		entity!.Email = null;
-		entity!.PhoneNumber = null;
+		var entity = SeedDataCreator.CreateAboutMe().FirstOrDefault();
+		entity!.FilePath = null;
 		entity!.LangId = 4;
 		try
 		{
@@ -244,21 +236,22 @@ public class ContactMeRepoTests
 			Assert.Pass();
 			return;
 		}
+		RollBack();
 		Assert.Fail("no exception thrown");
 	}
 	[Test]
 	public void Update_PassExistingValidEntity_UpdateEntity()
 	{
 		//Arrange
-		var entity = SeedDataCreator.CreateContactMe().FirstOrDefault();
-		entity!.Email = "info@hamidrm.ir";
-		entity!.PhoneNumber = "09304422204";
+		var entity = SeedDataCreator.CreateAboutMe().FirstOrDefault();
+		entity!.FilePath = "KJFGOE502K30FOJWO320930FJOW7490283";
+		entity!.LangId = 2;
 		//Act
 		_repo.Update(entity);
 		//Assert
-		var result = _db.ContactMe.AsNoTracking().FirstOrDefault();
-		Assert.That(result?.Email, Is.EqualTo(entity!.Email));
-		Assert.That(result?.PhoneNumber, Is.EqualTo(entity!.PhoneNumber));
+		var result = _db.AboutMe.AsNoTracking().FirstOrDefault();
+		Assert.That(result?.FilePath, Is.EqualTo(entity!.FilePath));
+		Assert.That(result?.LangId, Is.EqualTo(entity!.LangId));
 		//Annhilation
 		RollBack();
 	}
