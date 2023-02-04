@@ -56,27 +56,14 @@ namespace MyWebsite.Infrastructure.Persistent
 		public void SeedData(ModelBuilder builder)
 		{
 			builder.Entity<Language>().HasData(
-				new Language() { Id = 1, Culture = "fa-IR", IsActive = true },
-				new Language() { Id = 2, Culture = "en-US", IsActive = true }
+				SeedDataCreator.CreateLanguage()
 				);
-			builder.Entity<IdentityRole>().HasData(
-				 new IdentityRole() { Id = "019d60d6-3dbe-413d-8e76-849dc232df42", Name = Statics.Roles.SuperAdmin, NormalizedName = Statics.Roles.SuperAdmin.ToUpper() });
-			builder.Entity<ApplicationUser>().HasData(
-				 new ApplicationUser() { Id = "fc6daba2-b71e-4da6-833f-090a3d3c5824", SignUpDateTime = DateTime.Now, PhoneNumber = "09127337442", ImagePath = "avatar.png", Email = "admin@admin.com", NormalizedEmail = "ADMIN@ADMIN.COM", UserName = "admin", NormalizedUserName = "ADMIN", IsActive = true, PasswordHash = "AQAAAAEAACcQAAAAEJmA1NW1DTVMbtuO0Pp58yG9lgQtITsZK9OiMk0fsU6Nwy5RFK3NygEAmvjswiTW+Q==" }
-				 );
-			builder.Entity<IdentityUserRole<string>>().HasData(
-				 new IdentityUserRole<string>() { RoleId = "019d60d6-3dbe-413d-8e76-849dc232df42", UserId = "fc6daba2-b71e-4da6-833f-090a3d3c5824" });
-
-			foreach (var item in Enumerable.Range(1, 2))
-			{
-				builder.Entity<AboutMe>().HasData(
-					new AboutMe() { Id = item, LangId = item, FilePath = "no file", IsActive = true }
-					);
-				builder.Entity<ContactMe>().HasData(
-					 new ContactMe() { Id = item, LangId = item, PhoneNumber = "09304422204", Email = "test@test", IsActive = true });
-				builder.Entity<FirstTempInfo>().HasData(new FirstTempInfo() { Id = item, LangId = item, Description = "no desc", DarkImagePath = "no image", LightImagePath = "no image", IsActive = true });
-				builder.Entity<SecondTempInfo>().HasData(new SecondTempInfo() { Id = item + 2, LangId = item, Description = "no desc", DarkImagePath = "no image", LightImagePath = "no image", IsActive = true });
-			}
+			builder.Entity<IdentityRole>().HasData(SeedDataCreator.CreateRole());
+			builder.Entity<ApplicationUser>().HasData(SeedDataCreator.CreateDefaultUser());
+			builder.Entity<IdentityUserRole<string>>().HasData(SeedDataCreator.CreateUserRole());
+			builder.Entity<AboutMe>().HasData(SeedDataCreator.CreateAboutMe());
+			builder.Entity<ContactMe>().HasData(SeedDataCreator.CreateContactMe());
+			builder.Entity<FirstTempInfo>().HasData(SeedDataCreator.CreateFirstTempInfo());
 		}
 	}
 	public static class RegisterDbContext
