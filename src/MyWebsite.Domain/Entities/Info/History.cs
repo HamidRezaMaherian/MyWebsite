@@ -2,7 +2,7 @@
 
 namespace MyWebsite.Domain.Entities.Info
 {
-   public class History : BaseLanguageDescribe
+   public abstract class History : BaseLanguageDescribe
    {
       public string TimeSpan { get; set; }
       public string Link { get; set; }
