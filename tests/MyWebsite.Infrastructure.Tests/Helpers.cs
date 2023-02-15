@@ -35,4 +35,22 @@ public static class Helpers
 			return obj.GetHashCode();
 		}
 	}
+	public class ExperienceValueComparer : IEqualityComparer<Experience>
+	{
+		public bool Equals(Experience x, Experience y)
+		{
+			return x.Id == y.Id
+				 && x.Title == y.Title
+				 && x.SubTitle == y.SubTitle
+				 && x.LangId == y.LangId
+				 && x.Link == y.Link
+				 && x.Role == y.Role
+				 && x.TimeSpan == y.TimeSpan;
+		}
+
+		public int GetHashCode([DisallowNull] Experience obj)
+		{
+			return obj.GetHashCode();
+		}
+	}
 }
