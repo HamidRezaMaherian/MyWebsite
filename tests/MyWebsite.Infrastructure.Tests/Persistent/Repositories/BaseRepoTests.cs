@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using MyWebsite.Application.Exceptions;
 using MyWebsite.Domain.Base;
 using MyWebsite.Infrastructure.Persistent;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using static MyWebsite.Infrastructure.Tests.Helpers;
 
@@ -11,7 +10,7 @@ namespace MyWebsite.Infrastructure.Tests.Repositories.Info;
 
 [TestFixture]
 public abstract class BaseRepoTests<TEntity, IRepo>
-	where TEntity : BaseLanguageDescribe
+	where TEntity : BaseLanguage
 	where IRepo : class
 {
 	internal ApplicationDbContext _db;
@@ -86,7 +85,7 @@ public abstract class BaseRepoTests<TEntity, IRepo>
 
 		Expression<Func<TEntity, bool>> predicate = i => true;
 		Expression<Func<TEntity, bool>> predicate2 = i => i.Id > comparedObj1.Id;
-		Expression<Func<TEntity, bool>> predicate3 = i => i.Title == comparedObj2.Title;
+		Expression<Func<TEntity, bool>> predicate3 = i => i.LangId == comparedObj2.LangId;
 		IEnumerable<TEntity> res = _repo.GetAll(predicate);
 		IEnumerable<TEntity> res2 = _repo.GetAll(predicate2);
 		IEnumerable<TEntity> res3 = _repo.GetAll(predicate3);
@@ -151,7 +150,7 @@ public abstract class BaseRepoTests<TEntity, IRepo>
 
 		Expression<Func<TEntity, bool>> predicate = i => true;
 		Expression<Func<TEntity, bool>> predicate2 = i => i.Id > comparedObj1.Id;
-		Expression<Func<TEntity, bool>> predicate3 = i => i.Title == comparedObj2.Title;
+		Expression<Func<TEntity, bool>> predicate3 = i => i.LangId == comparedObj2.LangId;
 		TEntity res = _repo.FirstOrDefault(predicate);
 		TEntity res2 = _repo.FirstOrDefault(predicate2);
 		TEntity res3 = _repo.FirstOrDefault(predicate3);

@@ -53,4 +53,25 @@ public static class Helpers
 			return obj.GetHashCode();
 		}
 	}
+	internal class ProjectValueComparer : IEqualityComparer<Project>
+	{
+		public bool Equals(Project x, Project y)
+		{
+			return x.Id == y.Id
+				&& x.Name == y.Name
+				&& x.Type == y.Type
+				&& x.LangId == y.LangId
+				&& x.DateTime == y.DateTime
+				&& x.ImagePath == y.ImagePath
+				&& x.Techs == y.Techs
+				&& x.Role == y.Role
+				&& x.Link == y.Link;
+		}
+
+		public int GetHashCode([DisallowNull] Project obj)
+		{
+			return obj.GetHashCode();
+		}
+	}
+
 }
