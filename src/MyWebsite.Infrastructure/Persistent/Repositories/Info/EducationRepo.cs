@@ -33,23 +33,23 @@ namespace MyWebsite.Infrastructure.Repositories.Info
 		public Education FirstOrDefault(Expression<Func<Education, bool>> predicate)
 		{
 			ArgumentNullException.ThrowIfNull(predicate);
-			return _db.Educations.FirstOrDefault(predicate);
+			return _db.Educations.AsNoTracking().FirstOrDefault(predicate);
 		}
 
 		public Education FirstOrDefault()
 		{
-			return _db.Educations.FirstOrDefault();
+			return _db.Educations.AsNoTracking().FirstOrDefault();
 		}
 
 		public IEnumerable<Education> GetAll(Expression<Func<Education, bool>> predicate)
 		{
 			ArgumentNullException.ThrowIfNull(predicate);
-			return _db.Educations.Where(predicate).ToList();
+			return _db.Educations.AsNoTracking().Where(predicate).ToList();
 		}
 
 		public IEnumerable<Education> GetAll()
 		{
-			return _db.Educations.ToList();
+			return _db.Educations.AsNoTracking().ToList();
 		}
 
 		public Education GetById(int id)
