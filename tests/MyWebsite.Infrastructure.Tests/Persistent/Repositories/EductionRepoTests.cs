@@ -7,7 +7,7 @@ using static MyWebsite.Infrastructure.Tests.Helpers;
 namespace MyWebsite.Infrastructure.Tests.Repositories.Info;
 
 [TestFixture]
-public class EducationRepoTests : BaseRepoTests<Education, IEducationRepo>
+public class EducationRepoTests : BaseLanguageRepoTests<Education, IEducationRepo>
 {
 	protected override IEducationRepo CreateRepo()
 	{

@@ -6,7 +6,7 @@ using MyWebsite.Infrastructure.Repositories.Info;
 using static MyWebsite.Infrastructure.Tests.Helpers;
 
 [TestFixture]
-public class SkillRepoTests : BaseRepoTests<Skill, ISkillRepo>
+public class SkillRepoTests : BaseLanguageRepoTests<Skill, ISkillRepo>
 {
 	protected override ISkillRepo CreateRepo()
 	{

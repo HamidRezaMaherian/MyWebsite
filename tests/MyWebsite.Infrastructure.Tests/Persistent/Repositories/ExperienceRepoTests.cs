@@ -6,7 +6,7 @@ using MyWebsite.Domain.Entities.Info;
 using MyWebsite.Infrastructure.Repositories.Info;
 
 [TestFixture]
-public class ExperienceRepoTests : BaseRepoTests<Experience, IExperienceRepo>
+public class ExperienceRepoTests : BaseLanguageRepoTests<Experience, IExperienceRepo>
 {
 	protected override IExperienceRepo CreateRepo()
 	{
