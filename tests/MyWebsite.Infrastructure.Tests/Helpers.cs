@@ -89,5 +89,27 @@ public static class Helpers
 			return obj.GetHashCode();
 		}
 	}
+	internal class ContactMeFormValueComparer : IEqualityComparer<ContactMeForm>
+	{
+		public bool Equals(ContactMeForm x, ContactMeForm y)
+		{
+			return x.Id == y.Id
+				&& x.Name == y.Name
+				&& x.Email == y.Email
+				&& x.Answer == y.Answer
+				&& x.Message == y.Message
+				&& x.AnswerDateTime == y.AnswerDateTime
+				&& x.IsAnswered == y.IsAnswered
+				&& x.QuestionDateTime == y.QuestionDateTime
+				&& x.Subject == y.Subject
+				&& x.UserId == y.UserId
+				&& x.IsActive == y.IsActive;
+		}
+
+		public int GetHashCode([DisallowNull] ContactMeForm obj)
+		{
+			return obj.GetHashCode();
+		}
+	}
 
 }
