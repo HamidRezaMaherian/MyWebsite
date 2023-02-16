@@ -73,5 +73,21 @@ public static class Helpers
 			return obj.GetHashCode();
 		}
 	}
+	internal class SkillValueComparer : IEqualityComparer<Skill>
+	{
+		public bool Equals(Skill x, Skill y)
+		{
+			return x.Id == y.Id
+				&& x.Name == y.Name
+				&& x.Value == y.Value
+				&& x.LangId == y.LangId
+				&& x.IsActive == y.IsActive;
+		}
+
+		public int GetHashCode([DisallowNull] Skill obj)
+		{
+			return obj.GetHashCode();
+		}
+	}
 
 }
