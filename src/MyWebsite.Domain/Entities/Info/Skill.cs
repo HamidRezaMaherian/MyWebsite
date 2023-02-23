@@ -3,7 +3,7 @@ using MyWebsite.Shared.Attributes;
 
 namespace MyWebsite.Domain.Entities.Info
 {
-   public class Skill : BaseEntity
+   public class Skill : BaseLanguage
    {
       [Required]
       [StringLength(100)]

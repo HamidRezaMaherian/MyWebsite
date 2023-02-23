@@ -12,6 +12,19 @@ jobs:
 
     runs-on: ubuntu-latest
 
+        # Service containers to run with `container-job`
+    services:
+      # Label used to access the service container
+      mssql:
+        # Docker Hub image
+        image: mcr.microsoft.com/mssql/server:2019-latest
+        # Provide the password for postgres
+        env:
+          ACCEPT_EULA: Y 
+          MSSQL_SA_PASSWORD: Abcd1234@
+        ports:
+          - 1433:1433
+
     steps:
     - uses: actions/checkout@v3
     - name: Setup .NET
@@ -21,6 +34,6 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build -c TEST --no-restore
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test -c TEST --no-build --verbosity normal

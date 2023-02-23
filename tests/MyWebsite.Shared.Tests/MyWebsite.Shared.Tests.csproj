@@ -6,6 +6,8 @@
     <Nullable>warnings</Nullable>
 
     <IsPackable>false</IsPackable>
+
+    <Configurations>Debug;Release;Test</Configurations>
   </PropertyGroup>
 
 	<ItemGroup>

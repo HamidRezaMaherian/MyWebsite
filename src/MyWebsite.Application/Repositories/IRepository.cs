@@ -13,17 +13,15 @@ namespace MyWebsite.Application.Repositories
       T FirstOrDefault(Expression<Func<T, bool>> condition = null, bool asNoTracking = true, string includeProps = null);
       Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> condition = null, bool asNoTracking = true, string includeProps = null);
 
-      bool SoftDelete(object id);
-      bool SoftDelete(T entity);
-      bool HardDelete(object id);
-      bool HardDelete(T entity);
+      void SoftDelete(object id);
+      void SoftDelete(T entity);
+      void HardDelete(object id);
+      void HardDelete(T entity);
 
-      bool Add(T entity);
-      Task<bool> AddAsync(T entity);
+      void Add(T entity);
+      Task AddAsync(T entity);
 
-      bool Update(T entity);
-      bool Update(object id);
-
+      void Update(T entity);
       int Count(Expression<Func<T, bool>> condition = null);
    }
 }
