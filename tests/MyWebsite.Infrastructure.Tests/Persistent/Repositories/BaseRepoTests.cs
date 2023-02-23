@@ -377,8 +377,9 @@ public abstract class BaseRepoTests<TEntity, IRepo>
 	[Test]
 	public void GetById_PassNonExistingId()
 	{
-		TEntity entity = _repo.GetById(_seedData.Max(i => i.Id) + 1);
-		TEntity entity2 = _repo.GetById(_seedData.Min(i => i.Id) - 1);
+		var random = new Random();
+		TEntity entity = _repo.GetById(random.Next(_seedData.Max(i => i.Id) + 1, int.MaxValue));
+		TEntity entity2 = _repo.GetById(random.Next(_seedData.Min(i => i.Id) + 1, int.MaxValue));
 		Assert.That(entity, Is.Null);
 		Assert.That(entity2, Is.Null);
 	}
