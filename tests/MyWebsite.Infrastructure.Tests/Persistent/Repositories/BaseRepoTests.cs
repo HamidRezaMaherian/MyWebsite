@@ -379,7 +379,7 @@ public abstract class BaseRepoTests<TEntity, IRepo>
 	{
 		var random = new Random();
 		TEntity entity = _repo.GetById(random.Next(_seedData.Max(i => i.Id) + 1, int.MaxValue));
-		TEntity entity2 = _repo.GetById(random.Next(_seedData.Min(i => i.Id) + 1, int.MaxValue));
+		TEntity entity2 = _repo.GetById(random.Next(_seedData.Max(i => i.Id) + 1, int.MaxValue));
 		Assert.That(entity, Is.Null);
 		Assert.That(entity2, Is.Null);
 	}
