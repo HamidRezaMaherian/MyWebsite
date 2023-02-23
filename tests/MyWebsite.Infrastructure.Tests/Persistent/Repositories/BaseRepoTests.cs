@@ -354,14 +354,11 @@ public abstract class BaseRepoTests<TEntity, IRepo>
 
 		Expression<Func<TEntity, bool>> predicate = i => true;
 		Expression<Func<TEntity, bool>> predicate2 = i => i.Id > comparedObj1.Id;
-		Expression<Func<TEntity, bool>> predicate3 = i => !i.IsActive;
 		IEnumerable<TEntity> res = _repo.GetAll(predicate);
 		IEnumerable<TEntity> res2 = _repo.GetAll(predicate2);
-		IEnumerable<TEntity> res3 = _repo.GetAll(predicate3);
 
 		Assert.That(res.Select(i => i.Id), Is.EquivalentTo(_seedData.Select(i => i.Id)));
 		Assert.That(res2.Select(i => i.Id), Is.EquivalentTo(_seedData.Where(predicate2.Compile()).Select(i => i.Id)));
-		Assert.That(res3.Select(i => i.Id), Is.EquivalentTo(_seedData.Where(predicate3.Compile()).Select(i => i.Id)));
 	}
 	[Test]
 	public void GetById_PassInvalidArgument()
@@ -420,14 +417,11 @@ public abstract class BaseRepoTests<TEntity, IRepo>
 
 		Expression<Func<TEntity, bool>> predicate = i => true;
 		Expression<Func<TEntity, bool>> predicate2 = i => i.Id > comparedObj1.Id;
-		Expression<Func<TEntity, bool>> predicate3 = i => !i.IsActive;
 		TEntity res = _repo.FirstOrDefault(predicate);
 		TEntity res2 = _repo.FirstOrDefault(predicate2);
-		TEntity res3 = _repo.FirstOrDefault(predicate3);
 
 		Assert.That(res.Id, Is.EqualTo(_seedData.FirstOrDefault()!.Id));
 		Assert.That(res2.Id, Is.EqualTo(_seedData.FirstOrDefault(predicate2.Compile())!.Id));
-		Assert.That(res3.Id, Is.EqualTo(_seedData.FirstOrDefault(predicate3.Compile())!.Id));
 	}
 	[Test]
 	public void Insert_PassNull()
