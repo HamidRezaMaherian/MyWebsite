@@ -111,5 +111,38 @@ public static class Helpers
 			return obj.GetHashCode();
 		}
 	}
+	internal class MainInfoValueComparer : IEqualityComparer<MainInfo>
+	{
+		public bool Equals(MainInfo x, MainInfo y)
+		{
+			return x.Id == y.Id
+				&& x.Description == y.Description
+				&& x.DarkImagePath == y.DarkImagePath
+				&& x.LightImagePath == y.LightImagePath
+				&& x.LangId == y.LangId
+				&& x.IsActive == y.IsActive;
+		}
+
+		public int GetHashCode([DisallowNull] MainInfo obj)
+		{
+			return obj.GetHashCode();
+		}
+	}
+	internal class AboutMeKeyValueComparer : IEqualityComparer<AboutMeKeyValue>
+	{
+		public bool Equals(AboutMeKeyValue x, AboutMeKeyValue y)
+		{
+			return x.Id == y.Id
+				&& x.Key == y.Key
+				&& x.Value == y.Value
+				&& x.LangId == y.LangId
+				&& x.IsActive == y.IsActive;
+		}
+
+		public int GetHashCode([DisallowNull] AboutMeKeyValue obj)
+		{
+			return obj.GetHashCode();
+		}
+	}
 
 }
