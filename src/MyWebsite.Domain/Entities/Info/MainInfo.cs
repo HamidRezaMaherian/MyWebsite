@@ -10,8 +10,4 @@ namespace MyWebsite.Domain.Entities.Info
       public string LightImagePath { get; set; }
       public string Description { get; set; }
    }
-   public class FirstTempInfo : MainInfo
-   {
-   }
-   public class SecondTempInfo : MainInfo { }
 }

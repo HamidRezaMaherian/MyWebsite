@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 using MyWebsite.Domain.Entities;
 using MyWebsite.Domain.Entities.Info;
 using MyWebsite.Domain.Entities.User;
-using MyWebsite.Shared.Utilities;
 
 namespace MyWebsite.Infrastructure.Persistent
 {
@@ -45,8 +44,6 @@ namespace MyWebsite.Infrastructure.Persistent
 		public DbSet<Education> Educations { get; set; }
 
 		public DbSet<MainInfo> MainInfos { get; set; }
-		public DbSet<FirstTempInfo> FirstTempInfos { get; set; }
-		public DbSet<SecondTempInfo> SecondTempInfos { get; set; }
 
 		#endregion
 
@@ -63,7 +60,7 @@ namespace MyWebsite.Infrastructure.Persistent
 			builder.Entity<IdentityUserRole<string>>().HasData(SeedDataCreator.CreateUserRole());
 			builder.Entity<AboutMe>().HasData(SeedDataCreator.CreateAboutMe());
 			builder.Entity<ContactMe>().HasData(SeedDataCreator.CreateContactMe());
-			builder.Entity<FirstTempInfo>().HasData(SeedDataCreator.CreateFirstTempInfo());
+			builder.Entity<MainInfo>().HasData(SeedDataCreator.CreateMainInfo());
 		}
 	}
 	public static class RegisterDbContext
