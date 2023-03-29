@@ -22,7 +22,7 @@ namespace MyWebsite.Infrastructure.Persistent
 		}
 		public static ApplicationUser CreateDefaultUser()
 		{
-			return new ApplicationUser() { Id = "fc6daba2-b71e-4da6-833f-090a3d3c5824", SignUpDateTime = DateTime.Now, PhoneNumber = "09127337442", ImagePath = "avatar.png", Email = "admin@admin.com", NormalizedEmail = "ADMIN@ADMIN.COM", UserName = "admin", NormalizedUserName = "ADMIN", IsActive = true, PasswordHash = "AQAAAAEAACcQAAAAEJmA1NW1DTVMbtuO0Pp58yG9lgQtITsZK9OiMk0fsU6Nwy5RFK3NygEAmvjswiTW+Q==" };
+			return new ApplicationUser() { Id = "fc6daba2-b71e-4da6-833f-090a3d3c5824", SignUpDateTime = DateTime.Parse("3/29/2023"), PhoneNumber = "09127337442", ImagePath = "avatar.png", Email = "admin@admin.com", NormalizedEmail = "ADMIN@ADMIN.COM", UserName = "admin", NormalizedUserName = "ADMIN", IsActive = true, PasswordHash = "AQAAAAEAACcQAAAAEJmA1NW1DTVMbtuO0Pp58yG9lgQtITsZK9OiMk0fsU6Nwy5RFK3NygEAmvjswiTW+Q==" };
 		}
 		public static IdentityUserRole<string> CreateUserRole()
 		{
@@ -42,11 +42,11 @@ namespace MyWebsite.Infrastructure.Persistent
 					new ContactMe() { Id = 2, LangId = 2, PhoneNumber = "09304422204", Email = "test@test", IsActive = true }
 			};
 		}
-		public static IEnumerable<FirstTempInfo> CreateFirstTempInfo()
+		public static IEnumerable<MainInfo> CreateMainInfo()
 		{
-			return new FirstTempInfo[]{
-				new FirstTempInfo() { Id = 1, LangId = 1, Description = "no desc", DarkImagePath = "no image", LightImagePath = "no image", IsActive = true },
-				new FirstTempInfo() { Id = 2, LangId = 2, Description = "no desc", DarkImagePath = "no image", LightImagePath = "no image", IsActive = true }
+			return new MainInfo[]{
+				new MainInfo() { Id = 1, LangId = 1, Description = "no desc", DarkImagePath = "no image", LightImagePath = "no image", IsActive = true },
+				new MainInfo() { Id = 2, LangId = 2, Description = "no desc", DarkImagePath = "no image", LightImagePath = "no image", IsActive = true }
 				};
 		}
 	}
