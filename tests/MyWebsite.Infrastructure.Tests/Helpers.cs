@@ -111,5 +111,21 @@ public static class Helpers
 			return obj.GetHashCode();
 		}
 	}
+	internal class AboutMeKeyValueComparer : IEqualityComparer<AboutMeKeyValue>
+	{
+		public bool Equals(AboutMeKeyValue x, AboutMeKeyValue y)
+		{
+			return x.Id == y.Id
+				&& x.Key == y.Key
+				&& x.Value == y.Value
+				&& x.LangId == y.LangId
+				&& x.IsActive == y.IsActive;
+		}
+
+		public int GetHashCode([DisallowNull] AboutMeKeyValue obj)
+		{
+			return obj.GetHashCode();
+		}
+	}
 
 }
