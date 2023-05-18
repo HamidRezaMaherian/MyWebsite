@@ -9,6 +9,7 @@ using System.Linq.Expressions;
 
 namespace MyWebsite.Infrastructure.Repositories.Info
 {
+	[RepositoryConcrete(typeof(IExperienceRepo))]
 	internal class ExperienceRepo : IExperienceRepo
 	{
 		private ApplicationDbContext _db;

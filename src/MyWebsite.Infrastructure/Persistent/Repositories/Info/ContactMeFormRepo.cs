@@ -7,6 +7,7 @@ using System.Linq.Expressions;
 
 namespace MyWebsite.Infrastructure.Tests.Repositories.Info
 {
+	[RepositoryConcrete(typeof(IContactMeFormRepo))]
 	internal class ContactMeFormRepo : IContactMeFormRepo
 	{
 		private ApplicationDbContext _db;

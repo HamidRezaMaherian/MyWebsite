@@ -1,6 +1,7 @@
+using static MyWebsite.Infrastructure.IORegistery;
 public class Program
 {
-	public static void Main(string[] args)
+	public static async Task Main(string[] args)
 	{
 
 		var builder = WebApplication.CreateBuilder(args);
@@ -9,9 +10,11 @@ public class Program
 		builder.Services.AddControllersWithViews();
 
 		builder.Services.AddHealthChecks();
+		builder.Services.RegisterInfrastructure(builder.Configuration);
 
 		var app = builder.Build();
 
+		await builder.Services.MigrateDatabase();
 		// Configure the HTTP request pipeline.
 		if (!app.Environment.IsDevelopment())
 		{
@@ -21,8 +24,8 @@ public class Program
 		}
 
 		app.UseHttpsRedirection();
-		app.UseStaticFiles();
 
+		app.UseStaticFiles();
 		app.UseRouting();
 		app.UseAuthorization();
 		app.UseHealthChecks("/healthstatus");

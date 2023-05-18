@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using MyWebsite.Application.Repositories;
 using MyWebsite.Presentation.Controllers;
 using MyWebsite.Presentation.Model;
+using MyWebsite.Presentation.Resources;
 using MyWebsite.Presentation.Tests.Utils;
 using System.Collections.Immutable;
 using static MyWebsite.Presentation.Tests.Utils.Helpers;
@@ -55,6 +56,27 @@ namespace MyWebsite.Presentation.Tests.Unit
 			var model = viewResult!.Model as HomeVM;
 			Assert.That(viewResult!.Model, Is.InstanceOf<HomeVM>());
 			Assert.That(new HomeVMValueComparer().Equals(model, validModel));
+		}
+		[Test]
+		public void SwitchLang_PassNull_ReturnBadRequest()
+		{
+			var result = _controller.SwitchLanguage(null);
+			Assert.That(result, Is.InstanceOf<BadRequestObjectResult>());
+			Assert.That((result as BadRequestObjectResult).Value, Is.EqualTo(string.Format(ErrorResource.RequiredParameter,"Language")));
+		}
+		[Test]
+		public void SwitchLang_PassInvalidLocale_ReturnBadRequest()
+		{
+			var result = _controller.SwitchLanguage(Guid.NewGuid().ToString());
+			Assert.That(result, Is.InstanceOf<BadRequestObjectResult>());
+			Assert.That((result as BadRequestObjectResult).Value, Is.EqualTo(string.Format(ErrorResource.InvalidLocale)));
+		}
+		[Test]
+		public void SwitchLang_PassValidLocale_ReturnRedirectResult()
+		{
+			var result = _controller.SwitchLanguage("fa-IR");
+			Assert.That(result, Is.InstanceOf<RedirectResult>());
+			Assert.That((result as RedirectResult)!.Url, Is.EqualTo("/"));
 		}
 		private T InjectService<T>()
 		{

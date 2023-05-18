@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MyWebsite.Application.Repositories;
 using MyWebsite.Presentation.Model;
+using MyWebsite.Presentation.Resources;
+using MyWebsite.Shared.Attributes;
 using System.Collections.Immutable;
+using System.Globalization;
 
 namespace MyWebsite.Presentation.Controllers
 {
@@ -49,6 +52,19 @@ namespace MyWebsite.Presentation.Controllers
 				AboutMe = _aboutMeRepo.FirstOrDefault()
 			};
 			return View(model);
+		}
+
+		public IActionResult SwitchLanguage(string lang)
+		{
+			if (string.IsNullOrWhiteSpace(lang))
+			{
+				return BadRequest(string.Format(ErrorResource.RequiredParameter, "Language"));
+			}
+			if (CultureInfo.GetCultures(CultureTypes.AllCultures).Where(i => i.Name == lang).FirstOrDefault() is null)
+			{
+				return BadRequest(string.Format(ErrorResource.InvalidLocale));
+			}
+			return Redirect("/");
 		}
 	}
 }

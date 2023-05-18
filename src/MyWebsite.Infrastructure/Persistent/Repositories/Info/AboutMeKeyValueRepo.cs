@@ -7,6 +7,7 @@ using System.Linq.Expressions;
 
 namespace MyWebsite.Infrastructure.Repositories.Info
 {
+	[RepositoryConcrete(typeof(IAboutMeKeyValueRepo))]
 	internal class AboutMeKeyValueRepo : IAboutMeKeyValueRepo
 	{
 		private ApplicationDbContext _db;
