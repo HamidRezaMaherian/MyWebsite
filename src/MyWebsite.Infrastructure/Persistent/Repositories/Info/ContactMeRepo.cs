@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 
 namespace MyWebsite.Infrastructure.Repositories.Info
 {
+	[RepositoryConcrete(typeof(IContactMeRepo))]
 	internal class ContactMeRepo : IContactMeRepo
 	{
 		private readonly ApplicationDbContext _db;

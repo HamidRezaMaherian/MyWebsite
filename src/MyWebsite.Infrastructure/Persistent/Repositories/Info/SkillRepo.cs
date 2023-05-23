@@ -7,6 +7,7 @@ using System.Linq.Expressions;
 
 namespace MyWebsite.Infrastructure.Repositories.Info
 {
+	[RepositoryConcrete(typeof(ISkillRepo))]
 	internal class SkillRepo : ISkillRepo
 	{
 		private ApplicationDbContext _db;
