@@ -6,7 +6,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 	</PropertyGroup>
 	<ItemGroup>
-		<InternalsVisibleTo Include="MyWebsite.Presentation.Tests" />
+		<InternalsVisibleTo Include="MyWebsite.Presentation.UnitTests" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="../MyWebsite.Application/MyWebsite.Application.csproj" />
@@ -14,7 +14,6 @@
 		<ProjectReference Include="../MyWebsite.Presentation.Resources/MyWebsite.Presentation.Resources.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-		<Folder Include="Properties\" />
 		<Folder Include="wwwroot\" />
 	</ItemGroup>
 

@@ -1,3 +1,4 @@
+using MyWebsite.Presentation;
 using static MyWebsite.Infrastructure.IORegistery;
 public class Program
 {
@@ -32,7 +33,7 @@ public class Program
 		app.MapControllerRoute(
 			 name: "default",
 			 pattern: "{controller=Home}/{action=Index}/{id?}");
-
+		app.UseRouteHeaderMiddleware();
 		app.Run();
 	}
 }

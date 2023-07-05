@@ -8,6 +8,7 @@ public class Program
 		// Add services to the container.
 		builder.Services.AddRazorPages();
 		builder.Services.AddServerSideBlazor();
+		builder.Services.AddHttpContextAccessor();
 
 		builder.Services.AddHealthChecks();
 		var app = builder.Build();

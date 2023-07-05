@@ -1,7 +1,6 @@
 using MyWebsite.Application.Repositories;
 using MyWebsite.Domain.Entities.Info;
-using MyWebsite.Presentation.Tests.Utils;
-using System;
+using MyWebsite.Presentation.UnitTests.Utils;
 using System.Linq.Expressions;
 
 public class FakeEducationRepo : IEducationRepo

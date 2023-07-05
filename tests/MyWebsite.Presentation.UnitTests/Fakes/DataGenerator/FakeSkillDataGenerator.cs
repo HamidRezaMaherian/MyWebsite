@@ -1,6 +1,6 @@
 using Bogus;
 using MyWebsite.Domain.Entities.Info;
-using MyWebsite.Presentation.Tests.Utils;
+using MyWebsite.Presentation.UnitTests.Utils;
 
 public class FakeSkillDataGenerator : Faker<Skill>
 {

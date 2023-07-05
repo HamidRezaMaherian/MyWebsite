@@ -1,6 +1,6 @@
 using MyWebsite.Application.Repositories;
 using MyWebsite.Domain.Entities.Info;
-using MyWebsite.Presentation.Tests.Utils;
+using MyWebsite.Presentation.UnitTests.Utils;
 using System.Linq.Expressions;
 
 public class FakeSkillRepo : ISkillRepo
