@@ -11,16 +11,13 @@ namespace MyWebsite.Presentation.IntegrationTests
 		[SetUp]
 		public void SetUp()
 		{
-			_application = new TestingWebAppFactory<Program>((serviceCollection) =>
-			{
-			});
+			_application = new TestingWebAppFactory<Program>();
 		}
 		[TestCase("/", "Home", "Index")]
 		[TestCase("/home", "Home", "Index")]
 		[TestCase("/home/index", "Home", "Index")]
 		public async Task SiteRoutesEndpoint_ReturnsOk(string route, string controller, string action)
 		{
-			_application = new TestingWebAppFactory<Program>();
 			var client = _application.CreateClient();
 			var result = await client.GetAsync(route);
 			Assert.That(result.StatusCode, Is.EqualTo(HttpStatusCode.OK));
