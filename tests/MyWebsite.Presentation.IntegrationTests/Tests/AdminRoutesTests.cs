@@ -6,7 +6,7 @@ using System.Net;
 namespace MyWebsite.Presentation.Admin.IntergrationTests
 {
 	[TestFixture]
-	public class AdminRoutesTests : PageTest
+	public class AdminRoutesTests 
 	{
 		private TestingWebAppFactory<Program> _application;
 		private Uri _baseUri;
@@ -36,19 +36,19 @@ namespace MyWebsite.Presentation.Admin.IntergrationTests
 		[Ignore("will be complete in next commit")]
 		public async Task HomeRouteEndpoint_ReturnsOkWithProperHeader(string route, string componentName)
 		{
-			var browser = await Playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
-			{
-				Headless = false,
-			});
-			var page = await browser.NewPageAsync();
-			var res = await page.GotoAsync(new Uri(_baseUri, route).ToString());
-			await page.WaitForRequestAsync("**/blazor.server.js");
-			Assert.That(res!.Ok, Is.True);
-			page.Response += async (object sender, IResponse e) =>
-			{
-				await Expect(page).ToHaveTitleAsync("MyWebsite.Presentation.Admin");
-				Assert.That(e!.Headers.Contains(new KeyValuePair<string, string>("X-Component", componentName)), Is.True);
-			};
+			//var browser = await Playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
+			//{
+			//	Headless = false,
+			//});
+			//var page = await browser.NewPageAsync();
+			//var res = await page.GotoAsync(new Uri(_baseUri, route).ToString());
+			//await page.WaitForRequestAsync("**/blazor.server.js");
+			//Assert.That(res!.Ok, Is.True);
+			//page.Response += async (object sender, IResponse e) =>
+			//{
+			//	await Expect(page).ToHaveTitleAsync("MyWebsite.Presentation.Admin");
+			//	Assert.That(e!.Headers.Contains(new KeyValuePair<string, string>("X-Component", componentName)), Is.True);
+			//};
 		}
 	}
 }
