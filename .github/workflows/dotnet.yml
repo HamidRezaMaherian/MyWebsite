@@ -51,5 +51,4 @@ jobs:
       with: 
          token: ${{ secrets.CODECOV_TOKEN }}
          disable_default_path_fixes: true
-         fixes:
-            - "before/test-*::after/"
+         fixes: "before/test-*::after/"
