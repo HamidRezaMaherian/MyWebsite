@@ -16,7 +16,7 @@ namespace MyWebsite.Presentation.Admin.IntergrationTests
 			_application = new TestingWebAppFactory<Admin.Program>((serviceCollection) =>
 			{
 			});
-			_baseUri = new Uri(_application.Server.BaseAddress.ToString());
+			_baseUri = new Uri(_application.ServerAddress);
 		}
 		[OneTimeTearDown]
 		public void OneTimeTearDown()
@@ -33,22 +33,11 @@ namespace MyWebsite.Presentation.Admin.IntergrationTests
 
 		[TestCase("/", "Home")]
 		[TestCase("/home", "Home")]
-		[Ignore("will be complete in next commit")]
-		public async Task HomeRouteEndpoint_ReturnsOkWithProperHeader(string route, string componentName)
+		public async Task HomeRouteEndpoint_ReturnsOkWithProperHeader(string route, string title)
 		{
-			var browser = await Playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
-			{
-				Headless = false,
-			});
-			var page = await browser.NewPageAsync();
-			var res = await page.GotoAsync(new Uri(_baseUri, route).ToString());
-			await page.WaitForRequestAsync("**/blazor.server.js");
+			var res = await Page.GotoAsync(new Uri(_baseUri, route).ToString(), new PageGotoOptions() { WaitUntil = WaitUntilState.NetworkIdle });
+			await Expect(Page).ToHaveTitleAsync(title);
 			Assert.That(res!.Ok, Is.True);
-			page.Response += async (object sender, IResponse e) =>
-			{
-				await Expect(page).ToHaveTitleAsync("MyWebsite.Presentation.Admin");
-				Assert.That(e!.Headers.Contains(new KeyValuePair<string, string>("X-Component", componentName)), Is.True);
-			};
 		}
 	}
 }

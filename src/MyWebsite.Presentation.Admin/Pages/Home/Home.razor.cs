@@ -4,7 +4,7 @@ using MyWebsite.Presentation.Admin.Shared;
 
 namespace MyWebsite.Presentation.Admin.Pages.Home
 {
-	public partial class Home : BaseComponent
+	public partial class Home
 	{
 		[Inject]
 		public IJSRuntime _jsRuntime { get; set; }
